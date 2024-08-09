@@ -9,7 +9,7 @@ st.title('Olympics Data Dashboard (1994-2024)')
 @st.cache_data
 def load_data():
     # Replace 'path_to_your_csv.csv' with the actual path to your CSV file
-    return pd.read_csv('D:\\Downloads\\Desktop\\olympics_data.csv')
+    return pd.read_csv('https://github.com/YoussefIsmail90/Olympics-Streamlit-Dashboard/blob/main/olympics_data.csv')
 
 data = load_data()
 
