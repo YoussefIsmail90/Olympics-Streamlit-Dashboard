@@ -82,6 +82,26 @@ if not filtered_data.empty:
     )
     st.plotly_chart(fig_pie)
 
+    # New Insightful Graph: Top NOCs by Total Medals
+    st.subheader('Top NOCs by Total Medal Count')
+    top_nocs = data[(data['Year'] >= year_range[0]) & (data['Year'] <= year_range[1])]
+    top_nocs = top_nocs.groupby('NOC')[['Gold', 'Silver', 'Bronze']].sum().reset_index()
+    top_nocs['Total'] = top_nocs[['Gold', 'Silver', 'Bronze']].sum(axis=1)
+    top_nocs = top_nocs.sort_values(by='Total', ascending=False).head(10)
+
+    fig_top_nocs = px.bar(top_nocs, x='NOC', y='Total',
+                         title='Top 10 NOCs by Total Medal Count',
+                         labels={'Total': 'Total Medals'},
+                         color='Total',
+                         color_continuous_scale='Viridis')
+    fig_top_nocs.update_layout(
+        plot_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(title='NOC', title_font=dict(size=12), tickfont=dict(size=10)),
+        yaxis=dict(title='Total Medals', title_font=dict(size=12), tickfont=dict(size=10)),
+        title_font=dict(size=14)
+    )
+    st.plotly_chart(fig_top_nocs)
+
 else:
     st.write("No data available for the selected filters.")
 
