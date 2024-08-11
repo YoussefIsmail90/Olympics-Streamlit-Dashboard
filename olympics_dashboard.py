@@ -6,7 +6,7 @@ import plotly.express as px
 st.title('Olympics Data Dashboard (1994-2024)')
 
 # Load data
-#@st.cache_data
+@st.cache_data
 def load_data():
     # Use raw URL for GitHub file
     return pd.read_csv('https://raw.githubusercontent.com/YoussefIsmail90/Olympics-Streamlit-Dashboard/main/olympics_data.csv')
